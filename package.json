@@ -1,0 +1,25 @@
+{
+  "name": "essay-platform",
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate": "node scripts/generate.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.0",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.3.0",
+    "astro": "^5.7.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.65.0"
+  }
+}
