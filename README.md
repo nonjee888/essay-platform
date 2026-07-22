@@ -1,63 +1,49 @@
-# Astro Starter Kit: Blog
+# 묵혀둔 이야기
 
-```sh
-npm create astro@latest -- --template blog
+> 오래 삭여 두었던 글을 하나씩 꺼냅니다.
+
+줄거리를 Claude Code가 수필체로 각색해 올리는, 익명 수필 블로그.
+Astro 정적 사이트라 서버·DB·로그인이 없다.
+
+## 글 쓰는 흐름
+
+```
+줄거리 → Claude Code가 draft:true 초안(.md) 작성 → 내가 읽고 수정 → draft:false → git push → 자동 배포
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+AI가 만든 글은 **자동 발행되지 않는다.** `draft: true` 글은 배포 사이트에서 제외되고,
+사람이 직접 `draft`를 `false`로 바꿔야 공개된다.
 
-Features:
+## 글 한 편 = 파일 하나
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+`src/content/blog/<slug>.md`. frontmatter:
 
-## 🚀 Project Structure
+| 필드 | 필수 | 설명 |
+| :--- | :--: | :--- |
+| `title` | ✓ | 제목 |
+| `pubDate` | ✓ | 발행일 (`2026-07-22`) |
+| `draft` | · | `true`면 비공개 (기본 `false`) |
+| `description` | · | 목록·RSS·SEO용 한 줄 설명 |
+| `heroImage` | · | 대표 사진 (`src/assets/`에 두고 참조) |
 
-Inside of your Astro project, you'll see the following folders and files:
+목록·본문·RSS는 모두 [`src/lib/essays.ts`](src/lib/essays.ts)의 `getPublishedEssays()`를 거친다 —
+draft 누락을 한 곳에서 막는다.
 
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+## 명령어
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+| 명령 | 동작 |
+| :--- | :--- |
+| `npm install` | 의존성 설치 |
+| `npm run dev` | 로컬 서버 `localhost:4321` (draft도 미리보기됨) |
+| `npm run build` | `./dist/`로 프로덕션 빌드 (draft 제외) |
+| `npm run preview` | 빌드 결과 미리보기 |
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 배포
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+Vercel/Netlify에 이 리포를 연결하면 `git push` 시 자동 배포된다.
+배포 도메인이 정해지면 [`astro.config.mjs`](astro.config.mjs)의 `site`를 실제 주소로 바꾼다
+(RSS·sitemap·canonical URL에 쓰임).
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 규칙
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+작업 규칙과 안전 정책은 [`CLAUDE.md`](CLAUDE.md) 참고.
