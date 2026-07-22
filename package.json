@@ -9,8 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "generate": "node scripts/generate.mjs"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.0",
@@ -18,8 +17,5 @@
     "@astrojs/sitemap": "^3.3.0",
     "astro": "^5.7.0",
     "sharp": "^0.33.5"
-  },
-  "devDependencies": {
-    "@anthropic-ai/sdk": "^0.65.0"
   }
 }
