@@ -5,8 +5,23 @@ import { SITE_TITLE } from '../consts';
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<button id="theme-toggle" type="button" aria-label="테마 전환">🌙</button>
 	</nav>
 </header>
+
+<script is:inline>
+	const btn = document.getElementById('theme-toggle');
+	const paint = () => {
+		btn.textContent = document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
+	};
+	paint();
+	btn.addEventListener('click', () => {
+		const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+		document.documentElement.dataset.theme = next;
+		localStorage.setItem('theme', next);
+		paint();
+	});
+</script>
 <style>
 	header {
 		margin: 0;
@@ -38,10 +53,16 @@ import { SITE_TITLE } from '../consts';
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
-	@media (prefers-color-scheme: dark) {
-		header {
-			background: #201b16;
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 40%);
-		}
+	#theme-toggle {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-size: 1.1em;
+		line-height: 1;
+		padding: 0.2em;
+	}
+	:root[data-theme='dark'] header {
+		background: #201b16;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 40%);
 	}
 </style>
