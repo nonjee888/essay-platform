@@ -1,15 +1,10 @@
 ---
 import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">글</HeaderLink>
-			<a href="/rss.xml">RSS</a>
-		</div>
 	</nav>
 </header>
 <style>
